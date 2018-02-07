@@ -17,7 +17,12 @@ function showTwitter() {
     
     if(entry1 = "my-tweets") {
         // "new Twitter" doesn't appear to work as a constructor- debug
-        var client = new Twitter(keys.twitter);
+        var client = new Twitter({
+            consumer_key: process.env.TWITTER_CONSUMER_KEY,
+            consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+            access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+            access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+        });
         var myTweets = {
             screen_name:"EggMan2018"
         };
@@ -47,8 +52,8 @@ function showSpotify() {
 };
 
 function showOMDB() {
-    
-    request("http://www.omdbapi.com/?t=" + entry1 + "=&plot=short&apikey=trilogy", function (error, response, body) {
+        if(entry1 = "movie-this")
+    request("http://www.omdbapi.com/?t=" + entry2 + "=&plot=short&apikey=trilogy", function (error, response, body) {
     
         if (!error && response.statusCode === 200) {
                 console.log("Title: " + JSON.parse(body).Title);
@@ -61,5 +66,5 @@ function showOMDB() {
 };
 
 // Calling functions for each API
-//showTwitter(); (commented out due to constructor not working)
+// showTwitter(); commented out due to constructor not working.
 showOMDB();
