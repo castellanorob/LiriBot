@@ -5,11 +5,7 @@ var request = require('request');
 var twitter = require('twitter');
 var spotify = require('node-spotify-api');
 
-// "new Spotify" doesn't appear to work as a constructor- debug
-// var spotify = new Spotify(keys.spotify);
-
-
-// Variable for user entry slice(2).join(" ");
+// Variables for user entry 
 var entry1 = process.argv[2];
 var entry2 = process.argv[3];
 
@@ -39,6 +35,8 @@ function showTwitter() {
 
 function showSpotify() {
     if(entry1 = "spotify-this-song") {
+        // "new Spotify" doesn't appear to work as a constructor- debug
+        var spotify = new Spotify(keys.spotify);
         spotify.search({ type: 'track', query: 'All the Small Things' }, function(err, data) {
             if (err) {
               return console.log('Error occurred: ' + err);
@@ -61,6 +59,7 @@ function showOMDB() {
                 console.log("IMDB Rating: " + JSON.parse(body).imdbRating);
                 console.log("Rotten Tomatoes Rating: " + JSON.parse(body).Ratings[1].Value);
             }
+            //needs else statement to display movie info for Mr. Nobody if no movie title is entered
     });
     
 };
@@ -68,3 +67,4 @@ function showOMDB() {
 // Calling functions for each API
 // showTwitter(); commented out due to constructor not working.
 showOMDB();
+// showSpotify(); commented out due to constructor not working.
